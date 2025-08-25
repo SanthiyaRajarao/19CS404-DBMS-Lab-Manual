@@ -45,28 +45,117 @@ Design a database for patient management, appointments, medical records, and bil
    - Why you chose the entities and relationships.
    - How you modeled prerequisites or billing.
 
-# ER Diagram Submission - Student Name
+# EX:1 ER Diagram 
+## NAME: SANTHIYA R
+## REG.NO:212223230192
 
 ## Scenario Chosen:
-University / Hospital (choose one)
+Hospital
 
 ## ER Diagram:
-![ER Diagram](er_diagram.png)
+<img width="1536" height="1024" alt="hospital_er" src="https://github.com/user-attachments/assets/9f8f1c50-6559-496b-a79b-98341e6085e7" />
 
-## Entities and Attributes:
-- Entity1: Attributes
-- Entity2: Attributes
-...
 
-## Relationships and Constraints:
-- Relationship1 (Cardinality, Participation)
-- Relationship2 (Cardinality, Participation)
-...
+# Entities and Attributes:
+Department:
+Dept_ID (Primary Key)
 
-## Extension (Prerequisite / Billing):
-- Explain how you modeled prerequisites or billing.
+Name
 
-## Design Choices:
-Brief explanation of why you chose certain entities, relationships, and assumptions
+Head
 
-## RESULT
+Doctor:
+Doctor_ID (Primary Key)
+
+Name
+
+Contact_No
+
+Email
+
+Specialization
+
+Work_Schedule
+
+Patient:
+Patient_ID (Primary Key)
+
+Name
+
+DOB
+
+Gender
+
+Address
+
+Contact_No
+
+Email
+
+Work_Schedule
+
+Appointments:
+App_ID (Primary Key)
+
+Date
+
+Time
+
+Reason
+
+Add_Notes
+
+Medical Records:
+Med_Rec_ID (Primary Key)
+
+Diagnosis
+
+Medications
+
+Treatment
+
+Test Results
+
+# Relationships and Constraints:
+Specialized (Department → Doctor):
+One Department can have many Doctors.
+
+A Doctor belongs to one Department. (1:N cardinality)
+
+Assigned (Doctor → Appointments):
+One Doctor can be assigned to multiple Appointments.
+
+An Appointment is assigned to one Doctor. (1:N cardinality)
+
+Book (Patient → Appointments):
+One Patient can book multiple Appointments.
+
+Each Appointment is booked by one Patient. (1:N cardinality)
+
+Contain (Patient → Medical Records):
+One Patient can have multiple Medical Records.
+
+Each Medical Record belongs to one Patient. (1:N cardinality)
+
+Check (Doctor → Medical Records):
+One Doctor can check multiple Medical Records.
+
+Each Medical Record is checked by one Doctor. (1:N cardinality)
+
+Extension (Prerequisite / Billing):
+Billing (Extension Idea):
+Billing could be modeled by adding a new entity called Billing with attributes like Bill_ID, Amount, Payment_Method, and Payment_Status. It would have relationships with Appointments (each appointment generates a bill) and Patients (patients are billed for their appointments).
+
+# Design Choices:
+I chose the main entities such as Doctor, Patient, Appointments, Department, and Medical Records because they represent the core operations of a hospital.
+
+Relationships like Specialized, Assigned, Book, and Contain were added to represent the real-world interaction between these entities.
+
+I assumed that each appointment is uniquely identified and linked to one doctor and one patient.
+
+Work schedules for both doctors and patients are stored to manage availability.
+
+Medical records are detailed to include diagnosis, medications, treatment, and test results for better patient history tracking.
+
+# Result:
+Thus, the ER diagram for the hospital management system was successfully designed, and the entities, relationships, and constraints were clearly represented.
