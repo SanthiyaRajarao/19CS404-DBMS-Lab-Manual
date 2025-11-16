@@ -1,161 +1,155 @@
-# Experiment 1: Entity-Relationship (ER) Diagram
+# ER Diagram Workshop – Submission Template
 
-## 🎯 Objective:
-To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
+## Objective
+To understand and apply ER modeling concepts by creating ER diagrams for real-world applications.
 
-## 📚 Purpose:
-The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
+## Purpose
+Gain hands-on experience in designing ER diagrams that represent database structure including entities, relationships, attributes, and constraints.
+
+## Name : SANTHIYA R
+## Reg. No.: 212223230192
+---
+
+# Scenario A: City Fitness Club Management
+
+**Business Context:**  
+FlexiFit Gym wants a database to manage its members, trainers, and fitness programs.
+
+**Requirements:**  
+- Members register with name, membership type, and start date.  
+- Each member can join multiple programs (Yoga, Zumba, Weight Training).  
+- Trainers assigned to programs; a program may have multiple trainers.  
+- Members may book personal training sessions with trainers.  
+- Attendance recorded for each session.  
+- Payments tracked for memberships and sessions.
+
+### ER Diagram:
+
+<img width="908" height="687" alt="image" src="https://github.com/user-attachments/assets/76fb0969-7bdc-4853-ba3b-65dca62ce2fc" />
+
+
+### Entities and Attributes
+
+Member: Member_ID, Name, Membership_Type, Start_Date
+
+Trainer: Trainer_ID, Trainer_Name
+
+Programme: Programme_ID, Programme_Name, Programme_Slot
+
+Payment: Payment_ID, Membership, Date, Member_ID
+
+Session: Session_ID, Session_Slot, Session_Date, Trainer_ID, Member_ID
+
+Attendance: Attendance_ID, Time, Status, Percentage, Member_ID
+
+### Relationships and Constraints
+
+makes (Member → Payment) (Cardinality: 1:N, Participation: Partial)
+A member can make multiple payments; each payment belongs to one member.
+
+joins (Member → Programme) (Cardinality: N:M, Participation: Partial)
+A member can join many programmes; a programme may include many members.
+
+conducts (Trainer → Programme) (Cardinality: 1:N, Participation: Partial)
+Each trainer conducts multiple programmes, but every programme is handled by one trainer.
+
+Class (Member/Trainer → Session) (Cardinality: N:M, Participation: Partial)
+Sessions are attended by multiple members and managed by multiple trainers.
 
 ---
 
-## 🧪 Choose One Scenario:
+# Scenario B: City Library Event & Book Lending System
 
-### 🔹 Scenario 1: University Database
-Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
+**Business Context:**  
+The Central Library wants to manage book lending and cultural events.
 
-**User Requirements:**
-- Academic programs grouped under departments.
-- Students have admission number, name, DOB, contact info.
-- Instructors with staff number, contact info, etc.
-- Courses have number, name, credits.
-- Track course enrollments by students and enrollment date.
-- Add support for prerequisites (some courses require others).
+**Requirements:**  
+- Members borrow books, with loan and return dates tracked.  
+- Each book has title, author, and category.  
+- Library organizes events; members can register.  
+- Each event has one or more speakers/authors.  
+- Rooms are booked for events and study.  
+- Overdue fines apply for late returns.
+
+### ER Diagram:
+
+<img width="1307" height="794" alt="image" src="https://github.com/user-attachments/assets/5a7f2190-bb2f-47c5-8bca-23350605f08f" />
+
+### Entities and Attributes
+Member: Member_ID, Name, Address, Email, Phone
+
+Book: Book_ID, Title, Author
+
+Loan: Loan_ID, Loan_Date, Return_Date, Fine, Member_ID, Book_ID
+
+Event: Event_ID, Event_Name, Event_Type, Event_Date
+
+Room: Room_ID, Room_Name, Type, Capacity
+
+Event_Registration: Registration_ID, Date_of_Registration, Event_ID, Member_ID
+
+### Relationships and Constraints
+
+Receive (Member → Loan) (Cardinality: 1:N, Participation: Partial)
+A member can receive many loans; each loan is issued to one member.
+
+Held_In (Event → Room) (Cardinality: M:N, Participation: Partial)
+An event can be held in multiple rooms; each room can host multiple events.
+
+Registers (Member → Event) (Cardinality: N:M, Participation: Partial)
+A member can register for multiple events; an event can have many members.
+
+Event_Speaker (SpeakerAuthor → Event) (Cardinality: M:N, Participation: Partial)
+Speakers or authors can join multiple events; each event can feature many speakers.
 
 ---
 
-### 🔹 Scenario 2: Hospital Database
-Design a database for patient management, appointments, medical records, and billing.
+# Scenario C: Restaurant Table Reservation & Ordering
 
-**User Requirements:**
-- Patient details including contact and insurance.
-- Doctors and their departments, contact info, specialization.
-- Appointments with reason, time, patient-doctor link.
-- Medical records with treatments, diagnosis, test results.
-- Billing and payment details for each appointment.
+**Business Context:**  
+A popular restaurant wants to manage reservations, orders, and billing.
+
+**Requirements:**  
+- Customers can reserve tables or walk in.  
+- Each reservation includes date, time, and number of guests.  
+- Customers place food orders linked to reservations.  
+- Each order contains multiple dishes; dishes belong to categories (starter, main, dessert).  
+- Bills generated per reservation, including food and service charges.  
+- Waiters assigned to serve reservations.
+
+### ER Diagram:
+
+<img width="1305" height="818" alt="image" src="https://github.com/user-attachments/assets/2a6027cf-9b50-484d-b505-0ed37a548a01" />
+
+### Entities and Attributes
+
+Customer: Customer_ID, Name
+
+Reservation: Reservation_ID, Date, Time, No_of_Guests, Customer_ID, Table_ID
+
+Table: Table_ID, Capacity
+
+Dish: Dish_ID, Name, Price, Category_ID
+
+Category: Category_ID, Name
+
+
+### Relationships and Constraints
+
+TO (Customer → Reservation) (Cardinality: 1:N, Participation: Partial)
+Each customer can make many reservations, and each reservation belongs to one customer.
+
+FOR (Reservation → Table) (Cardinality: 1:N, Participation: Partial)
+A reservation may include one or more tables; each table may be reserved multiple times.
+
+SELECT (Category → Dish) (Cardinality: 1:N, Participation: Total)
+A category can contain many dishes; each dish belongs to one category.
+
+TOTAL (Reservation → Bill) (Cardinality: 1:1, Participation: Total for Bill)
+Every reservation generates one bill.
 
 ---
 
-## 📝 Tasks:
-1. Identify entities, relationships, and attributes.
-2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
-3. Include:
-   - Cardinality & participation constraints
-   - Prerequisites for University OR Billing for Hospital
-4. Explain:
-   - Why you chose the entities and relationships.
-   - How you modeled prerequisites or billing.
+### Result
 
-# EX:1 ER Diagram 
-## NAME: SANTHIYA R
-## REG.NO:212223230192
-
-## Scenario Chosen:
-Hospital
-
-## ER Diagram:
-<img width="1536" height="1024" alt="hospital_er" src="https://github.com/user-attachments/assets/9f8f1c50-6559-496b-a79b-98341e6085e7" />
-
-
-# Entities and Attributes:
-Department:
-Dept_ID (Primary Key)
-
-Name
-
-Head
-
-Doctor:
-Doctor_ID (Primary Key)
-
-Name
-
-Contact_No
-
-Email
-
-Specialization
-
-Work_Schedule
-
-Patient:
-Patient_ID (Primary Key)
-
-Name
-
-DOB
-
-Gender
-
-Address
-
-Contact_No
-
-Email
-
-Work_Schedule
-
-Appointments:
-App_ID (Primary Key)
-
-Date
-
-Time
-
-Reason
-
-Add_Notes
-
-Medical Records:
-Med_Rec_ID (Primary Key)
-
-Diagnosis
-
-Medications
-
-Treatment
-
-Test Results
-
-# Relationships and Constraints:
-Specialized (Department → Doctor):
-One Department can have many Doctors.
-
-A Doctor belongs to one Department. (1:N cardinality)
-
-Assigned (Doctor → Appointments):
-One Doctor can be assigned to multiple Appointments.
-
-An Appointment is assigned to one Doctor. (1:N cardinality)
-
-Book (Patient → Appointments):
-One Patient can book multiple Appointments.
-
-Each Appointment is booked by one Patient. (1:N cardinality)
-
-Contain (Patient → Medical Records):
-One Patient can have multiple Medical Records.
-
-Each Medical Record belongs to one Patient. (1:N cardinality)
-
-Check (Doctor → Medical Records):
-One Doctor can check multiple Medical Records.
-
-Each Medical Record is checked by one Doctor. (1:N cardinality)
-
-Extension (Prerequisite / Billing):
-Billing (Extension Idea):
-Billing could be modeled by adding a new entity called Billing with attributes like Bill_ID, Amount, Payment_Method, and Payment_Status. It would have relationships with Appointments (each appointment generates a bill) and Patients (patients are billed for their appointments).
-
-# Design Choices:
-I chose the main entities such as Doctor, Patient, Appointments, Department, and Medical Records because they represent the core operations of a hospital.
-
-Relationships like Specialized, Assigned, Book, and Contain were added to represent the real-world interaction between these entities.
-
-I assumed that each appointment is uniquely identified and linked to one doctor and one patient.
-
-Work schedules for both doctors and patients are stored to manage availability.
-
-Medical records are detailed to include diagnosis, medications, treatment, and test results for better patient history tracking.
-
-# Result:
-Thus, the ER diagram for the hospital management system was successfully designed, and the entities, relationships, and constraints were clearly represented.
+The combined ER diagram effectively represents entities and relationships of the restaurant, fitness club, and library systems. It clearly captures interactions like reservations, sessions, and book lending, ensuring smooth data flow and efficient system management.
